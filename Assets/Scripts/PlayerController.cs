@@ -12,11 +12,14 @@ public class PlayerController : MonoBehaviour
     private int count;
     private float movementX;
     private float movementY;
+    private Vector3 offset;
 
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-  
+    public GameObject confettiFx;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,7 +27,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         count = 0;
         SetCountText();
-        winTextObject.SetActive(false);;
+        winTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -38,10 +41,11 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
 
-        countText.text = "Count: " + count.ToString();
+        countText.text = "Count: 8/" + count.ToString();
 
         if (count >= 8)
         {
+            Instantiate(confettiFx);
             winTextObject.SetActive(true);
 
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
@@ -53,6 +57,7 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -77,4 +82,5 @@ public class PlayerController : MonoBehaviour
 
         }      
     }
+
 }
