@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-    public GameObject confettiFx;
+    public ParticleSystem confettiFx;
 
 
 
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
         if (count >= 8)
         {
-            Instantiate(confettiFx);
+            confettiFx.Play();
             winTextObject.SetActive(true);
 
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
